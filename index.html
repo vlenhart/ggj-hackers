@@ -32,12 +32,29 @@
       width: 100%
     }
     
+    #game-over-screen,
+    #level-completed-screen{
+      display: none;
+      position: absolute;
+      width: 800px;
+      height: 600px;
+      background: url("noise3.gif");
+      background-size: 100%;
+    }
+    
   </style>
  </head>
 
 <body>
 
 <div id="container">
+  <div id="game-over-screen">
+    <img src="game-over-screen.png" />
+  </div>
+  <div id="level-completed-screen">
+    <img src="level-completed-screen.png" />
+  </div>
+
   <div id="hacking-tool">
     <textarea id="code"></textarea>
     <button id="run-button">Run</button>
@@ -45,6 +62,7 @@
   <canvas id="canvas" width="800" height="600"></canvas>
 </div>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script type="text/javascript">
 
 // chrome/safari compatiblity
@@ -174,10 +192,9 @@ var Player = {
     }
 
     if(isPointInPoly(this.x, this.y, Level.exit)) {
-      console.log("level completed");
+      $("#level-completed-screen").fadeIn(1000);
       game_is_running=false;
-      // todo: show won screen -> html/css
-      // todo: allow transition to next level
+      // todo: allow transition to next level (button? link?)
     }
   }
 };
@@ -197,10 +214,9 @@ var Cameras = {
       ctx.closePath();
       if(this.cameras[i].hasCollision) {
         ctx.strokeStyle = "red";
-        console.log("game over");
+        $("#game-over-screen").fadeIn(1000);
         game_is_running=false;
-        // todo: show won screen -> html/css
-        // todo: allow transition to next level
+        // todo: allow player to reload (button)
       }
       ctx.stroke();
       ctx.strokeStyle = "black";
