@@ -32,12 +32,33 @@
       width: 100%
     }
     
+    #title-screen,
+    #game-over-screen,
+    #level-completed-screen{
+      display: none;
+      position: absolute;
+      width: 800px;
+      height: 600px;
+      background: url("noise3.gif");
+      background-size: 100%;
+    }
+    
   </style>
  </head>
 
 <body>
 
 <div id="container">
+  <div id="title-screen" style="display:block;">
+    <img onclick="start_game();" src="title-screen.png" />
+  </div>
+  <div id="game-over-screen">
+    <img src="game-over-screen.png" />
+  </div>
+  <div id="level-completed-screen">
+    <img src="level-completed-screen.png" />
+  </div>
+
   <div id="hacking-tool">
     <textarea id="code"></textarea>
     <button id="run-button">Run</button>
@@ -45,6 +66,8 @@
   <canvas id="canvas" width="800" height="600"></canvas>
 </div>
 
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <h1>Controlls:</h1>
 <p>
 <ol>
@@ -65,9 +88,7 @@
 	</li>
 </ol>
 </p>
-
 <script type="text/javascript">
-
 // chrome/safari compatiblity
 if(!window.KeyEvent) {
   window.KeyEvent = {
@@ -237,6 +258,11 @@ var Player = {
       this.y = new_y;
     }
 
+    if(isPointInPoly(this.x, this.y, Level.exit)) {
+      $("#level-completed-screen").fadeIn(1000);
+      game_is_running=false;
+      // todo: allow transition to next level (button? link?)
+    }
   }
 };
 
@@ -255,6 +281,9 @@ var Cameras = {
       ctx.closePath();
       if(this.cameras[i].hasCollision) {
         ctx.strokeStyle = "red";
+        $("#game-over-screen").fadeIn(1000);
+        game_is_running=false;
+        // todo: allow player to reload (button)
       }
       ctx.stroke();
       ctx.strokeStyle = "black";
@@ -330,8 +359,11 @@ var HackTool = {
 };
 
 var Level = {
+  walkable: undefined,
+  exit: undefined,
   draw: function() {
     drawPolygon(this.walkable);
+    drawPolygon(this.exit);
   },
   load: function(filename) {
     var xhr = new XMLHttpRequest();
@@ -339,27 +371,50 @@ var Level = {
     xhr.send();
     xmlDoc = xhr.responseXML;
     
-    // parse player
-    var elm = xmlDoc.getElementById("player");
-    Player.x = elm.cx.baseVal.value;
-    Player.y = elm.cy.baseVal.value;
-    
-    // parse walkable area
-    elm = xmlDoc.getElementById("walkable");
-    Level.walkable = new Array();
-    for(var i=0; i<elm.points.length; i++) {
-      Level.walkable.push(elm.points[i].x);
-      Level.walkable.push(elm.points[i].y);
-    }
-    
-    // parse cameras
     elm = xmlDoc.getElementsByTagName("svg")[0].childNodes;
     for(var i=0; i<elm.length; i++) {
-      if(elm[i].id && elm[i].id.indexOf("camera")==0) {
+      if(!elm[i].id) {
+        continue;
+      }
+      
+      // parse player
+      if(elm[i].id == "player") {
+        Player.x = elm[i].cx.baseVal.value;
+        Player.y = elm[i].cy.baseVal.value;
+      }
+      
+      // parse walkable area
+      if(elm[i].id == "walkable") {
+        Level.walkable = new Array();
+        for(var j=0; j<elm[i].points.length; j++) {
+          Level.walkable.push(elm[i].points[j].x);
+          Level.walkable.push(elm[i].points[j].y);
+        }
+      }
+      
+      // parse exit area
+      if(elm[i].id == "exit") {
+        Level.exit = new Array();
+        if(elm[i].tagName == "rect") {
+          Level.exit.push(elm[i].x.baseVal.value);
+          Level.exit.push(elm[i].y.baseVal.value);
+          Level.exit.push(elm[i].x.baseVal.value+elm[i].width.baseVal.value);
+          Level.exit.push(elm[i].y.baseVal.value);
+          Level.exit.push(elm[i].x.baseVal.value+elm[i].width.baseVal.value);
+          Level.exit.push(elm[i].y.baseVal.value+elm[i].height.baseVal.value);
+          Level.exit.push(elm[i].x.baseVal.value);
+          Level.exit.push(elm[i].y.baseVal.value+elm[i].height.baseVal.value);
+        } else {
+          for(var j=0; j<elm[i].points.length; j++) {
+            Level.exit.push(elm[i].points[j].x);
+            Level.exit.push(elm[i].points[j].y);
+          }
+        }
+      }
+      
+      // parse cameras
+      if(elm[i].id.indexOf("camera")==0) {
         var script = elm[i].getAttribute("hackers:camera-script");
-        script = script.replace("&gt;", ">");
-        script = script.replace("&lt;", "<");
-        
         Cameras.create(
           parseFloat(elm[i].getAttribute("sodipodi:cx")),
           parseFloat(elm[i].getAttribute("sodipodi:cy")),
@@ -370,8 +425,18 @@ var Level = {
           eval("("+script+")")
         );
       }
+      
+      // parse terminals
+      if(elm[i].id.indexOf("terminal")==0) {
+        var script = elm[i].getAttribute("hackers:terminal-script");
+        var poly = new Array();
+        for(var j=0; j<elm[i].points.length; j++) {
+          poly.push(elm[i].points[j].x);
+          poly.push(elm[i].points[j].y);
+        }
+        Terminals.create(poly, eval("("+script+")"));
+      }
     }
-    // todo: parse the rest
   }
 };
 
@@ -396,33 +461,13 @@ addEventListener("keyup", function (e) {
 
 function init() {
   Level.load("level1 copy.svg");
-  /*
-  // hardcoded level 1
-  Cameras.create(190,149,133.667, 45, 22.5, 0.2, function() {
-    if(this.direction<45-(22.5/2) || this.direction>90-(22.5/2)) this.speed=-this.speed;
-    this.direction+=this.speed;
-  });
-  Cameras.create(534,149,137.666, 150, 15, 0.1, function() {
-    if(this.direction<150 || this.direction>150+20) this.speed=-this.speed;
-    this.direction+=this.speed;
-  });
-  Cameras.create(534,440,158.334, -135, 25, 0.1, function() {
-    if(this.direction<-135 || this.direction>-90-(45/2)) this.speed=-this.speed;
-    this.direction+=this.speed;
-  });
-  Cameras.create(303.5,251,146.833, 55, 25, 0.1, function() {
-    if(this.direction<45-22.5 || this.direction>90-22.5) this.speed=-this.speed;
-    this.direction+=this.speed;
-  });
-  */
-  Terminals.create([312.333,404.333, 312.333+49.667,404.333, 312.333+49.667,404.333+28, 312.333,404.333+28], function() {
-    alert("Hello World!");
-  });
-  
   HackTool.init();
 }
 
+var game_is_running = false;
 function draw() {
+  if(!game_is_running) return;
+  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   Level.draw();
   Cameras.update();
@@ -433,8 +478,13 @@ function draw() {
   Player.draw();
 }
 
-init();
-var timerID = setInterval(draw, 10);
+function start_game() {
+  $("#title-screen").fadeOut(1000);
+  init();
+  game_is_running = true;
+  setInterval(draw, 10);
+}
+
 
 </script>
 

@@ -2,6 +2,7 @@
 <!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg
+   xmlns:hackers="http://valentinlaube.de/projects/hackers/"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -9,7 +10,6 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:hackers="http://valentinlaube.de/projects/hackers/"
    version="1.1"
    id="Layer_1"
    x="0px"
@@ -37,7 +37,7 @@
      id="namedview3082"
      showgrid="false"
      inkscape:zoom="2.2"
-     inkscape:cx="381.81818"
+     inkscape:cx="345.45454"
      inkscape:cy="300"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -54,14 +54,12 @@
      fill="none"
      stroke="#000000"
      stroke-miterlimit="10"
-     points="190,440 190,149 534,149 534,234 423,234   423,251 534,251 534,440 303.5,440 303.5,251 371,251 371,235 285.5,235 285.5,440 " /><rect
-     id="terminal1"
-     x="312.33301"
-     y="404.33301"
+     points="190,440 190,149 534,149 534,234 423,234   423,251 534,251 534,440 303.5,440 303.5,251 371,251 371,235 285.5,235 285.5,440 " /><polygon
+     points="362.333,432.333 312.333,432.333 312.333,404.333 362.333,404.333 "
      stroke-miterlimit="10"
-     width="49.667"
-     height="28"
-     style="fill:none;stroke:#000000;stroke-miterlimit:10" /><path
+     id="terminal1"
+     style="fill:none;stroke:#000000;stroke-miterlimit:10"
+     hackers:terminal-script="function() {   window.camera_4_active = true; }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera1"
@@ -75,11 +73,7 @@
      inkscape:transform-center-x="-55.047235"
      inkscape:transform-center-y="54.395256"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {
-     if(this.angle_start&lt;Math.radians(5) || this.angle_end&gt;Math.radians(85)) this.speed=-this.speed;
-     this.angle_start+=this.speed;
-     this.angle_end+=this.speed;
-     }" /><path
+     hackers:camera-script="function(){      if(this.angle_start&lt;Math.radians(5) || this.angle_end&gt;Math.radians(85)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera2"
@@ -87,17 +81,13 @@
      sodipodi:cy="251.81818"
      sodipodi:rx="146.36363"
      sodipodi:ry="146.36363"
-     d="m 442.27161,300.07176 a 146.36363,146.36363 0 0 1 -38.41209,58.83768 L 304.09091,251.81818 z"
-     sodipodi:start="0.33596762"
-     sodipodi:end="0.8207825"
+     d="M 450.18557,260.68745 A 146.36363,146.36363 0 0 1 434.684,317.9072 L 304.09091,251.81818 z"
+     sodipodi:start="0.060634658"
+     sodipodi:end="0.46849047"
      inkscape:transform-center-x="-67.092265"
      inkscape:transform-center-y="65.532754"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {
-     if(this.angle_start&lt;Math.radians(0) || this.angle_end&gt;Math.radians(65)) this.speed=-this.speed;
-     this.angle_start+=this.speed;
-     this.angle_end+=this.speed;
-     }" /><path
+     hackers:camera-script="function() {      if(this.angle_start&lt;Math.radians(0) || this.angle_end&gt;Math.radians(90)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera3"
@@ -105,17 +95,13 @@
      sodipodi:cy="439.09091"
      sodipodi:rx="162.72728"
      sodipodi:ry="162.72728"
-     d="m 407.23142,334.40898 a 162.72728,162.72728 0 0 1 65.85087,-47.07532 l 58.73589,151.75725 z"
-     sodipodi:start="3.8403892"
-     sodipodi:end="4.3431061"
+     d="m 369.70594,424.95618 a 162.72728,162.72728 0 0 1 17.04872,-59.59954 l 145.06352,73.73427 z"
+     sodipodi:start="3.2285637"
+     sodipodi:end="3.6118499"
      inkscape:transform-center-x="65.736324"
      inkscape:transform-center-y="-76.777463"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {
-     if(this.angle_start&lt;Math.radians(180) || this.angle_end&gt;Math.radians(270)) this.speed=-this.speed;
-     this.angle_start+=this.speed;
-     this.angle_end+=this.speed;
-     }" /><path
+     hackers:camera-script="function() {      if(this.angle_start&lt;Math.radians(180) || this.angle_end&gt;Math.radians(250)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera4"
@@ -128,8 +114,11 @@
      sodipodi:end="2.8530156"
      inkscape:transform-center-x="68.15262"
      inkscape:transform-center-y="40.307767"
-     hackers:camera-speed="0.1"
-     hackers:camera-script="function() {
-    if(this.direction&lt;150 || this.direction&gt;150+20) this.speed=-this.speed;
-    this.direction+=this.speed;
-  }" /></svg>
+     hackers:camera-speed="0.002"
+     hackers:camera-script="function() {      if(!window.camera_4_active) return;      if(this.angle_start&lt;Math.radians(140) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><rect
+     style="fill:none;stroke:#000000"
+     id="exit"
+     width="47.272728"
+     height="53.18182"
+     x="482.27274"
+     y="175.45454" /></svg>
