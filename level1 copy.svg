@@ -54,8 +54,8 @@
      fill="none"
      stroke="#000000"
      stroke-miterlimit="10"
-     points="190,440 190,149 534,149 534,234 423,234   423,251 534,251 534,440 303.5,440 303.5,251 371,251 371,235 285.5,235 285.5,440 " /><polygon
-     points="362.333,432.333 312.333,432.333 312.333,404.333 362.333,404.333 "
+     points="200,429 200,159 524,159 524,234 417,234 417,256 453,257 453,287 477.767,287.645 480.909,333.595 493,347.5 475,365.356 469.112,394.777 488,430 342.5,430  339.788,398.401 397.525,399.583 397.768,350.37 354.333,350.283 355.574,316.174 398.705,315.912 400.357,264.993 312.5,265.5 311.5,255 383,255 383,235 285.5,235 285.5,429 " /><polygon
+     points="391.5,436 337.5,436 337.333,395.333 391.5,395.333 "
      stroke-miterlimit="10"
      id="terminal1"
      style="fill:none;stroke:#000000;stroke-miterlimit:10"
@@ -91,22 +91,22 @@
      sodipodi:end="0.46849047"
      inkscape:transform-center-x="-67.092265"
      inkscape:transform-center-y="65.532754"
-     hackers:camera-speed="0.002"
-     hackers:camera-script="function() {      if(!window.camera_2_active) return;      if(this.angle_start&lt;Math.radians(0) || this.angle_end&gt;Math.radians(90)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
+     hackers:camera-speed="0.001"
+     hackers:camera-script="function() {      if(!window.camera_2_active) return;      if(this.angle_start&lt;Math.radians(0) || this.angle_end&gt;Math.radians(40)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera3"
      sodipodi:cx="531.81818"
      sodipodi:cy="439.09091"
-     sodipodi:rx="162.72728"
-     sodipodi:ry="162.72728"
+     sodipodi:rx="132.72728"
+     sodipodi:ry="132.72728"
      d="m 369.70594,424.95618 a 162.72728,162.72728 0 0 1 17.04872,-59.59954 l 145.06352,73.73427 z"
-     sodipodi:start="3.2285637"
-     sodipodi:end="3.6118499"
+     sodipodi:start="3.9285637"
+     sodipodi:end="4.3118499"
      inkscape:transform-center-x="65.736324"
      inkscape:transform-center-y="-76.777463"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {      if(!window.camera_3_active) return;      if(this.angle_start&lt;Math.radians(180) || this.angle_end&gt;Math.radians(250)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
+     hackers:camera-script="function() {      if(!window.camera_3_active) return;      if(this.angle_start&lt;Math.radians(180) || this.angle_end&gt;Math.radians(260)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera4"
@@ -115,12 +115,12 @@
      sodipodi:rx="136.36363"
      sodipodi:ry="136.36363"
      d="m 420.23599,225.95409 a 136.36363,136.36363 0 0 1 -17.77914,-37.60113 l 130.72497,-38.8075 z"
-     sodipodi:start="2.5468085"
-     sodipodi:end="2.8530156"
+     sodipodi:start="2.4"
+     sodipodi:end="2.7"
      inkscape:transform-center-x="68.15262"
      inkscape:transform-center-y="40.307767"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {      if(!window.camera_4_active) return;      if(this.angle_start&lt;Math.radians(140) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><rect
+     hackers:camera-script="function() {      if(!window.camera_4_active) return;      if(this.angle_start&lt;Math.radians(120) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><rect
      style="fill:none;stroke:#000000"
      id="exit"
      width="47.272728"
