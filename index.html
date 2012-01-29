@@ -32,6 +32,7 @@
       width: 100%
     }
     
+    #title-screen,
     #game-over-screen,
     #level-completed-screen{
       display: none;
@@ -48,6 +49,9 @@
 <body>
 
 <div id="container">
+  <div id="title-screen" style="display:block;">
+    <img onclick="start_game();" src="title-screen.png" />
+  </div>
   <div id="game-over-screen">
     <img src="game-over-screen.png" />
   </div>
@@ -393,7 +397,7 @@ function init() {
   HackTool.init();
 }
 
-var game_is_running = true;
+var game_is_running = false;
 function draw() {
   if(!game_is_running) return;
   
@@ -407,8 +411,13 @@ function draw() {
   Player.draw();
 }
 
-init();
-var timerID = setInterval(draw, 10);
+function start_game() {
+  $("#title-screen").fadeOut(1000);
+  init();
+  game_is_running = true;
+  setInterval(draw, 10);
+}
+
 
 </script>
 
