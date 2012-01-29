@@ -23,6 +23,7 @@
     #hacking-tool textarea {
       display: block;
       width: 100%;
+      height: 100%;
     }
     #hacking-tool button {
       display: block;
@@ -55,7 +56,7 @@
     <img onclick="start_game();" src="title-screen.png" />
   </div>
   <div id="game-over-screen">
-    <img src="game-over-screen.png" />
+    <img onclick="location.reload();" src="game-over-screen.png" />
   </div>
   <div id="level-completed-screen">
     <img src="level-completed-screen.png" />
@@ -78,7 +79,7 @@ if(!window.KeyEvent) {
     DOM_VK_RIGHT: 0x27,
     DOM_VK_UP:    0x26,
     DOM_VK_DOWN:  0x28,
-    DOM_VK_SPACE:	32
+    DOM_VK_SPACE:	0x20
   };
 }
 
@@ -270,7 +271,8 @@ var Terminals = {
     if (KeyEvent.DOM_VK_SPACE in keysDown) {
       for(var i=0; i<this.regions.length; i++) {
         if(isPointInPoly(Player.x, Player.y, this.regions[i])) {
-          HackTool.show(this.functions[i].toString());
+          //HackTool.show(this.functions[i].toString());
+          HackTool.show(i);
           break;
         }
       }
@@ -288,6 +290,7 @@ var HackTool = {
   container: undefined,
   button: undefined,
   textarea: undefined,
+  current_terminal_index: -1,
   init: function() {
     this.container = document.getElementById("hacking-tool");
     this.textarea = document.getElementById("code");
@@ -295,17 +298,23 @@ var HackTool = {
     
     this.button.addEventListener("click", function (e) {
       eval("("+HackTool.textarea.value+")()");
+      HackTool.saveCode(HackTool.textarea.value);
       HackTool.hide(); // xxx: add a close button instead??
     });
   },
-  show: function(code) {
+  show: function(terminal_index) {
+    this.current_terminal_index = terminal_index;
     this.isEnabled = true;
-    this.textarea.value = code;
+    this.textarea.value = Terminals.functions[terminal_index].toString();
     this.container.style.display = "block";
   },
   hide: function() {
     this.container.style.display = "none";
     this.isEnabled = false;
+  },
+  saveCode: function(code) {
+    var fn = eval("("+code+")");
+    Terminals.functions[this.current_terminal_index] = fn;
   }
 };
 
@@ -388,7 +397,9 @@ var Level = {
           poly.push(elm[i].points[j].x);
           poly.push(elm[i].points[j].y);
         }
-        Terminals.create(poly, eval("("+script+")"));
+        var fn = eval("("+script+")");
+        Terminals.create(poly, fn);
+        fn();
       }
     }
   }
@@ -398,6 +409,14 @@ var Level = {
 var keysDown = {};
 
 addEventListener("keydown", function (e) {
+  if($("#title-screen").is(":visible")) {
+    $("#title-screen img").click();
+    return;
+  }
+  if($("#game-over-screen").is(":visible")) {
+    $("#game-over-screen img").click();
+    return;
+  }
   if(HackTool.isEnabled) return true;
   
 	keysDown[e.keyCode] = true;

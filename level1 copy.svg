@@ -59,7 +59,12 @@
      stroke-miterlimit="10"
      id="terminal1"
      style="fill:none;stroke:#000000;stroke-miterlimit:10"
-     hackers:terminal-script="function() {   window.camera_4_active = true; }" /><path
+     hackers:terminal-script="function() {
+     window.camera_1_active = true;
+     window.camera_2_active = true;
+     window.camera_3_active = true;
+     window.camera_4_active = false;
+     }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera1"
@@ -73,7 +78,7 @@
      inkscape:transform-center-x="-55.047235"
      inkscape:transform-center-y="54.395256"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function(){      if(this.angle_start&lt;Math.radians(5) || this.angle_end&gt;Math.radians(85)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
+     hackers:camera-script="function(){      if(!window.camera_1_active) return;      if(this.angle_start&lt;Math.radians(5) || this.angle_end&gt;Math.radians(85)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera2"
@@ -87,7 +92,7 @@
      inkscape:transform-center-x="-67.092265"
      inkscape:transform-center-y="65.532754"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {      if(this.angle_start&lt;Math.radians(0) || this.angle_end&gt;Math.radians(90)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
+     hackers:camera-script="function() {      if(!window.camera_2_active) return;      if(this.angle_start&lt;Math.radians(0) || this.angle_end&gt;Math.radians(90)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera3"
@@ -101,7 +106,7 @@
      inkscape:transform-center-x="65.736324"
      inkscape:transform-center-y="-76.777463"
      hackers:camera-speed="0.002"
-     hackers:camera-script="function() {      if(this.angle_start&lt;Math.radians(180) || this.angle_end&gt;Math.radians(250)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
+     hackers:camera-script="function() {      if(!window.camera_3_active) return;      if(this.angle_start&lt;Math.radians(180) || this.angle_end&gt;Math.radians(250)) this.speed=-this.speed;      this.angle_start+=this.speed;      this.angle_end+=this.speed;      }" /><path
      sodipodi:type="arc"
      style="fill:none;stroke:#000000"
      id="camera4"
