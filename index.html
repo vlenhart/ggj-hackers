@@ -79,7 +79,7 @@ if(!window.KeyEvent) {
     DOM_VK_RIGHT: 0x27,
     DOM_VK_UP:    0x26,
     DOM_VK_DOWN:  0x28,
-    DOM_VK_SPACE:	0x20
+    DOM_VK_SPACE: 0x20
   };
 }
 
@@ -350,9 +350,9 @@ var Level = {
       // parse walkable area
       if(elm[i].id == "walkable") {
         Level.walkable = new Array();
-        for(var j=0; j<elm[i].points.length; j++) {
-          Level.walkable.push(elm[i].points[j].x);
-          Level.walkable.push(elm[i].points[j].y);
+        for(var j=0; j<elm[i].points.numberOfItems; j++) {
+          Level.walkable.push(elm[i].points.getItem(j).x);
+          Level.walkable.push(elm[i].points.getItem(j).y);
         }
       }
       
@@ -369,9 +369,9 @@ var Level = {
           Level.exit.push(elm[i].x.baseVal.value);
           Level.exit.push(elm[i].y.baseVal.value+elm[i].height.baseVal.value);
         } else {
-          for(var j=0; j<elm[i].points.length; j++) {
-            Level.exit.push(elm[i].points[j].x);
-            Level.exit.push(elm[i].points[j].y);
+          for(var j=0; j<elm[i].points.numberOfItems; j++) {
+            Level.exit.push(elm[i].points.getItem(j).x);
+            Level.exit.push(elm[i].points.getItem(j).y);
           }
         }
       }
@@ -394,9 +394,9 @@ var Level = {
       if(elm[i].id.indexOf("terminal")==0) {
         var script = elm[i].getAttribute("hackers:terminal-script");
         var poly = new Array();
-        for(var j=0; j<elm[i].points.length; j++) {
-          poly.push(elm[i].points[j].x);
-          poly.push(elm[i].points[j].y);
+        for(var j=0; j<elm[i].points.numberOfItems; j++) {
+          poly.push(elm[i].points.getItem(j).x);
+          poly.push(elm[i].points.getItem(j).y);
         }
         var fn = eval("("+script+")");
         Terminals.create(poly, fn);
