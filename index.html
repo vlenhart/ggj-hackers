@@ -49,7 +49,7 @@
 
 <body>
 
-<img id="level1-image" src="level1-image.png" style="display:none;" />
+<!--img id="level1-image" src="level1-image.png" style="display:none;" /-->
 
 <div id="container">
   <div id="title-screen" style="display:block;">
@@ -322,7 +322,8 @@ var Level = {
   walkable: undefined,
   exit: undefined,
   draw: function() {
-    ctx.drawImage(document.getElementById("level1-image"),0,0);  
+    //ctx.drawImage(document.getElementById("level1-image"),0,0);
+    ctx.drawImage(level_background,0,0);
   },
   debug_draw: function() {
     drawPolygon(this.walkable);
@@ -432,7 +433,9 @@ addEventListener("keyup", function (e) {
   }
 }, false);
 
+var level_background = new Image();
 function init() {
+  level_background.src = "level1-image.png";
   Level.load("level1 copy.svg");
   HackTool.init();
   ctx.strokeStyle = "white";
