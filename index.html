@@ -48,6 +48,8 @@
 
 <body>
 
+<img id="level1-image" src="level1-image.png" style="display:none;" />
+
 <div id="container">
   <div id="title-screen" style="display:block;">
     <img onclick="start_game();" src="title-screen.png" />
@@ -210,7 +212,7 @@ var Cameras = {
     camera["fn"]=bind(camera, fn);
     this.cameras.push(camera);
   },
-  draw: function() {
+  debug_draw: function() {
     for(var i=0; i<this.cameras.length; i++) {
       ctx.beginPath();
       ctx.moveTo(this.cameras[i].x, this.cameras[i].y);
@@ -223,7 +225,23 @@ var Cameras = {
         // todo: allow player to reload (button)
       }
       ctx.stroke();
-      ctx.strokeStyle = "black";
+      ctx.strokeStyle = "white";
+    }
+  },
+  draw: function() {
+    for(var i=0; i<this.cameras.length; i++) {
+      ctx.fillStyle = "rgba(31, 200, 49, 0.5)";
+      ctx.beginPath();
+      ctx.moveTo(this.cameras[i].x, this.cameras[i].y);
+      ctx.arc(this.cameras[i].x, this.cameras[i].y, this.cameras[i].size, this.cameras[i].angle_start, this.cameras[i].angle_end, false);
+      ctx.closePath();
+      if(this.cameras[i].hasCollision) {
+        ctx.fillStyle = "rgba(226, 71, 35, 0.5)";
+        $("#game-over-screen").fadeIn(1000);
+        game_is_running=false;
+        // todo: allow player to reload (button)
+      }
+      ctx.fill();
     }
   },
   update: function() {
@@ -295,6 +313,9 @@ var Level = {
   walkable: undefined,
   exit: undefined,
   draw: function() {
+    ctx.drawImage(document.getElementById("level1-image"),0,0);  
+  },
+  debug_draw: function() {
     drawPolygon(this.walkable);
     drawPolygon(this.exit);
   },
@@ -395,6 +416,7 @@ addEventListener("keyup", function (e) {
 function init() {
   Level.load("level1 copy.svg");
   HackTool.init();
+  ctx.strokeStyle = "white";
 }
 
 var game_is_running = false;
@@ -406,7 +428,7 @@ function draw() {
   Cameras.update();
   Cameras.draw();
   Terminals.update();
-  Terminals.draw();
+  //Terminals.draw();
   Player.update();
   Player.draw();
 }
