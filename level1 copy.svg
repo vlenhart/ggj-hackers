@@ -132,4 +132,14 @@
   width="97.5" height="61.356"
   hackers:message="I should probably avoid being seen by those cameras..."
 />
+<rect id="message2" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+  x="337.25" y="154.5"
+  width="43.25" height="85"
+  hackers:message="This camera seems to be stuck, I have to find a way to reach the exit."
+/>
+<rect id="message3" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+  x="331" y="391.25" 
+  width="56.5" height="49.5"
+  hackers:message="I can probably access this terminal. (press space to use)"
+/>
 </svg>
