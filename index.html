@@ -453,6 +453,8 @@ function draw() {
 }
 
 function start_game() {
+  if(game_is_running) return;
+  
   $("#title-screen").fadeOut(1000);
   init();
   game_is_running = true;
