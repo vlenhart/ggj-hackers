@@ -81,10 +81,10 @@
    width="30"
    height="71"
    hackers:terminal-script="function() {
-   window.camera_1_active = true;
-   window.camera_2_active = true;
-   window.camera_3_active = false;
-   window.camera_4_active = true;
+   window.camera_1_moving = true;
+   window.camera_2_moving = true;
+   window.camera_3_moving = false;
+   window.camera_4_moving = true;
    }" />
 <rect
    id="exit"
@@ -136,7 +136,7 @@
    sodipodi:start="2.2235069"
    sodipodi:end="2.6543779"
    hackers:camera-speed="0.0001"
-   hackers:camera-script="function() {      if(!window.camera_1_active) return;      if(this.angle_start&lt;Math.radians(45) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_1_speed*this.speed);      this.angle_end+=(window.camera_1_speed*this.speed);      }" /><rect
+   hackers:camera-script="function() {      if(!window.camera_1_moving) return;      if(this.angle_start&lt;Math.radians(45) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_1_speed*this.speed);      this.angle_end+=(window.camera_1_speed*this.speed);      }" /><rect
    id="rect3110" />
 <path
    sodipodi:type="arc"
@@ -150,7 +150,7 @@
    sodipodi:start="0.78797183"
    sodipodi:end="1.2187986"
    hackers:camera-speed="0.0001"
-   hackers:camera-script="function() {      if(!window.camera_2_active) return;      if(this.angle_start&lt;Math.radians(45) || this.angle_end&gt;Math.radians(135)) this.speed=-this.speed;      this.angle_start+=(window.camera_2_speed*this.speed);      this.angle_end+=(window.camera_2_speed*this.speed);      }" /><rect
+   hackers:camera-script="function() {      if(!window.camera_2_moving) return;      if(this.angle_start&lt;Math.radians(45) || this.angle_end&gt;Math.radians(135)) this.speed=-this.speed;      this.angle_start+=(window.camera_2_speed*this.speed);      this.angle_end+=(window.camera_2_speed*this.speed);      }" /><rect
    id="rect3113" />
 <path
    sodipodi:type="arc"
@@ -161,10 +161,10 @@
    sodipodi:rx="98.994949"
    sodipodi:ry="98.994949"
    d="M 557.93972,358.6617 A 98.994949,98.994949 0 0 1 510.20577,327.17788 L 586.2558,263.80286 z"
-   sodipodi:start="1.8608833"
-   sodipodi:end="2.4468544"
+   sodipodi:start="1.9608833"
+   sodipodi:end="2.3468544"
    hackers:camera-speed="0.0001"
-   hackers:camera-script="function() {      if(!window.camera_3_active) return;      if(this.angle_start&lt;Math.radians(90) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_3_speed*this.speed);      this.angle_end+=(window.camera_3_speed*this.speed);      }" /><rect
+   hackers:camera-script="function() {      if(!window.camera_3_moving) return;      if(this.angle_start&lt;Math.radians(90) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_3_speed*this.speed);      this.angle_end+=(window.camera_3_speed*this.speed);      }" /><rect
    id="rect3116" />
 <path
    sodipodi:type="arc"
@@ -179,6 +179,6 @@
    sodipodi:start="2.2067577"
    sodipodi:end="2.3862024"
    hackers:camera-speed="0.0001"
-   hackers:camera-script="function() {      if(!window.camera_4_active) return;      if(this.angle_start&lt;Math.radians(120) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_4_speed*this.speed);      this.angle_end+=(window.camera_4_speed*this.speed);      }" /><rect
+   hackers:camera-script="function() {      if(!window.camera_4_moving) return;      if(this.angle_start&lt;Math.radians(120) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_4_speed*this.speed);      this.angle_end+=(window.camera_4_speed*this.speed);      }" /><rect
    id="rect3119" />
    </svg>
