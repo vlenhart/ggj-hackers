@@ -71,7 +71,7 @@
     <img onclick="location.reload();" src="game-over-screen.png" />
   </div>
   <div id="level-completed-screen">
-    <img src="level-completed-screen.png" />
+    <img onclick="start_next_level();" src="level-completed-screen.png" />
   </div>
   <div id="message">Hello World</div>
 
@@ -182,6 +182,17 @@ function bind(scope, fn) {
   };
 }
 
+function parseArea(elm) {
+  if(elm.tagName == "rect") {
+    return parseRect(elm);
+  } else if(elm.tagName == "polygon") {
+    return parsePolygon(elm);
+  } else {
+    throw "unknown type for area";
+  }
+}
+
+
 function parsePolygon(poly) {
   var points = new Array();
   for(var i=0; i<poly.points.numberOfItems; i++) {
@@ -235,14 +246,14 @@ var Player = {
 
     if(isPointInPoly(this.x, this.y, Level.exit)) {
       $("#level-completed-screen").fadeIn(1000);
-      game_is_running=false;
+      //game_is_running=false;
       // todo: allow transition to next level (button? link?)
     }
   }
 };
 
 var Cameras = {
-  cameras: [],
+  cameras: new Array(),
   create: function(x, y, size, angle_start, angle_end, speed, fn) {
     var camera = {x: x, y:y, size:size, angle_start:angle_start, angle_end:angle_end, speed:speed}
     camera["fn"]=bind(camera, fn);
@@ -292,6 +303,10 @@ var Cameras = {
         this.cameras[i].hasCollision = false;
       }
     }
+  },
+  unload: function() {
+    delete this.cameras;
+    this.cameras = new Array();
   }
 }
 
@@ -317,6 +332,12 @@ var Terminals = {
     for(var i=0; i<this.regions.length; i++) {
       drawPolygon(this.regions[i]);
     }
+  },
+  unload: function() {
+    delete this.regions;
+    delete this.functions;
+    this.regions = new Array();
+    this.functions = new Array();
   }
 };
 
@@ -368,6 +389,14 @@ var Messages = {
         $("#message").fadeOut();
       }
     }
+  },
+  unload: function() {
+    delete this.messages;
+    delete this.areas;
+    delete this.states;
+    this.messages = new Array();
+    this.areas = new Array();
+    this.states = new Array();
   }
 };
 
@@ -403,16 +432,12 @@ var Level = {
       
       // parse walkable area
       if(elm[i].id == "walkable") {
-        Level.walkable = parsePolygon(elm[i]);
+        Level.walkable = parseArea(elm[i]);
       }
       
       // parse exit area
       if(elm[i].id == "exit") {
-        if(elm[i].tagName == "rect") {
-          Level.exit = parseRect(elm[i]);
-        } else {
-          Level.exit = parsePolygon(elm[i]);
-        }
+        Level.exit = parseArea(elm[i]);
       }
       
       // parse cameras
@@ -432,7 +457,7 @@ var Level = {
       // parse terminals
       if(elm[i].id.indexOf("terminal")==0) {
         var script = elm[i].getAttribute("hackers:terminal-script");
-        var poly = parsePolygon(elm[i])
+        var poly = parseArea(elm[i]);
         var fn = eval("("+script+")");
         Terminals.create(poly, fn);
         fn();
@@ -441,10 +466,18 @@ var Level = {
       // parse message areas
       if(elm[i].id.indexOf("message")==0) {
         Messages.messages.push(elm[i].getAttribute("hackers:message"));
-        Messages.areas.push(parseRect(elm[i]));
+        Messages.areas.push(parseArea(elm[i]));
         Messages.states.push(false);
       }
     }
+  },
+  unload: function() {
+    game_is_running=false;
+    delete this.walkable;
+    delete this.exit;
+    Terminals.unload();
+    Messages.unload();
+    Cameras.unload();
   }
 };
 
@@ -452,12 +485,16 @@ var Level = {
 var keysDown = {};
 
 addEventListener("keydown", function (e) {
-  if($("#title-screen").is(":visible")) {
+  if($("#title-screen").is(":visible") && e.keyCode == KeyEvent.DOM_VK_SPACE) {
     $("#title-screen img").click();
     return;
   }
-  if($("#game-over-screen").is(":visible")) {
+  if($("#game-over-screen").is(":visible") && e.keyCode == KeyEvent.DOM_VK_SPACE) {
     $("#game-over-screen img").click();
+    return;
+  }
+  if($("#level-completed-screen").is(":visible") && e.keyCode == KeyEvent.DOM_VK_SPACE) {
+    $("#level-completed-screen img").click();
     return;
   }
   if(HackTool.isEnabled) return true;
@@ -507,6 +544,13 @@ function start_game() {
   setInterval(draw, 10);
 }
 
+function start_next_level() {
+  Level.unload();
+  level_background.src = "level2-image.png";
+  Level.load("level2.svg");
+  game_is_running = true;
+  $("#level-completed-screen").fadeOut(1000);
+}
 
 </script>
 

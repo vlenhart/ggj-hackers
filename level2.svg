@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 15.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:hackers="http://valentinlaube.de/projects/hackers/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="800px"
+   height="600px"
+   viewBox="0 0 800 600"
+   xml:space="preserve"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="level2.svg"><metadata
+   id="metadata3085"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs3083" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1440"
+   inkscape:window-height="878"
+   id="namedview3081"
+   showgrid="false"
+   inkscape:zoom="1.5556349"
+   inkscape:cx="450.05811"
+   inkscape:cy="345.03555"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<image
+   sodipodi:absref="/Users/vlaube/Documents/Projekte/ggj-hackers/level2-image.png"
+   xlink:href="level2-image.png"
+   width="800"
+   height="600"
+   id="image3072" />
+<polygon
+   id="walkable"
+   fill="none"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   points="174.5,157 261.5,157 261.5,264.25   340.75,264.25 340.75,246 286.25,246 286.25,157 334,157 334,181.25 352.5,199.75 377.25,199.75 377.25,244.75 369.75,244.75   369.75,262.75 523.25,262.75 523.25,246 493,246 493,185.25 501.25,185.25 514.25,198.25 549.75,192.25 554.75,157 588.5,157   588.5,244.75 562.25,244.75 562.25,262 588.5,262 588.5,319.5 562.25,319.5 562.25,338.75 588.5,338.75 588.5,428.5 490.5,428.5   490.5,337.75 520.5,337.75 520.5,321 471.75,321 471.75,428.5 411,428.5 430.625,408.875 430.625,390.5 446.062,375.062   446.062,351.25 435.031,340.219 417,340.219 403.016,326.234 383.75,326.234 365.5,340 365.5,352.75 349.25,362 342.75,385.5   364,404.5 381.5,415.75 387.25,428.5 252,428.5 264,415 266.25,389 262.75,384.75 260,338.25 268.5,331.25 265.25,309.75   242.25,300 215.5,310.75 179,319.5 175.25,315.75 " />
+<rect
+   id="terminal1"
+   x="354.5"
+   y="192.5"
+   fill="none"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   width="35"
+   height="48.5"
+   hackers:terminal-script="function() {
+   window.camera_1_speed = 20;
+   window.camera_2_speed = 20;
+   window.camera_3_speed = 20;
+   window.camera_4_speed = 200;
+   }" />
+<rect
+   id="terminal2"
+   x="489.5"
+   y="179"
+   fill="none"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   width="30"
+   height="71"
+   hackers:terminal-script="function() {
+   window.camera_1_active = true;
+   window.camera_2_active = true;
+   window.camera_3_active = false;
+   window.camera_4_active = true;
+   }" />
+<rect
+   id="exit"
+   x="504.5"
+   y="394"
+   fill="none"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   width="67"
+   height="38" />
+<rect
+   id="message1"
+   x="336"
+   y="184"
+   fill="none"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   width="49.5"
+   height="73.5"
+   hackers:message="Looks like this terminal only has restricted access." />
+<rect
+   id="message2"
+   x="484.5"
+   y="167"
+   fill="none"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   width="58.5"
+   height="88"
+   hackers:message="This terminal has full access." />
+<circle
+   id="player"
+   fill="#FFFFFF"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   cx="185"
+   cy="185"
+   r="10" />
+<path
+   sodipodi:type="arc"
+   style="fill:#ffffff;stroke:#ffffff"
+   id="camera1"
+   sodipodi:cx="302.72726"
+   sodipodi:cy="264.54544"
+   sodipodi:rx="90"
+   sodipodi:ry="90"
+   d="M 253.03564,332.43399 A 81.818184,85.454544 0 0 1 230.42942,304.5524 l 72.29784,-40.00696 z"
+   transform="matrix(1.5785448,0,0,1.5785448,-185.55527,-155.97623)"
+   sodipodi:start="2.2235069"
+   sodipodi:end="2.6543779"
+   hackers:camera-speed="0.0001"
+   hackers:camera-script="function() {      if(!window.camera_1_active) return;      if(this.angle_start&lt;Math.radians(45) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_1_speed*this.speed);      this.angle_end+=(window.camera_1_speed*this.speed);      }" /><rect
+   id="rect3110" />
+<path
+   sodipodi:type="arc"
+   style="fill:#ffffff;stroke:#ffffff"
+   id="camera2"
+   sodipodi:cx="330"
+   sodipodi:cy="264.54544"
+   sodipodi:rx="95.454544"
+   sodipodi:ry="95.454544"
+   d="m 397.32262,332.21549 a 95.454544,95.454544 0 0 1 -34.4124,21.93178 L 330,264.54544 z"
+   sodipodi:start="0.78797183"
+   sodipodi:end="1.2187986"
+   hackers:camera-speed="0.0001"
+   hackers:camera-script="function() {      if(!window.camera_2_active) return;      if(this.angle_start&lt;Math.radians(45) || this.angle_end&gt;Math.radians(135)) this.speed=-this.speed;      this.angle_start+=(window.camera_2_speed*this.speed);      this.angle_end+=(window.camera_2_speed*this.speed);      }" /><rect
+   id="rect3113" />
+<path
+   sodipodi:type="arc"
+   style="fill:#ffffff;stroke:#ffffff"
+   id="camera3"
+   sodipodi:cx="586.2558"
+   sodipodi:cy="263.80286"
+   sodipodi:rx="98.994949"
+   sodipodi:ry="98.994949"
+   d="M 557.93972,358.6617 A 98.994949,98.994949 0 0 1 510.20577,327.17788 L 586.2558,263.80286 z"
+   sodipodi:start="1.8608833"
+   sodipodi:end="2.4468544"
+   hackers:camera-speed="0.0001"
+   hackers:camera-script="function() {      if(!window.camera_3_active) return;      if(this.angle_start&lt;Math.radians(90) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_3_speed*this.speed);      this.angle_end+=(window.camera_3_speed*this.speed);      }" /><rect
+   id="rect3116" />
+<path
+   sodipodi:type="arc"
+   style="fill:#ffffff;stroke:#ffffff"
+   id="camera4"
+   sodipodi:cx="587.54144"
+   sodipodi:cy="157.73685"
+   sodipodi:rx="120.20815"
+   sodipodi:ry="120.20815"
+   d="m 516.14366,254.44443 a 120.20815,120.20815 0 0 1 -16.11424,-14.29614 l 87.51202,-82.41144 z"
+   transform="matrix(1.0319527,0,0,1.0319527,-18.77351,-5.0401112)"
+   sodipodi:start="2.2067577"
+   sodipodi:end="2.3862024"
+   hackers:camera-speed="0.0001"
+   hackers:camera-script="function() {      if(!window.camera_4_active) return;      if(this.angle_start&lt;Math.radians(120) || this.angle_end&gt;Math.radians(180)) this.speed=-this.speed;      this.angle_start+=(window.camera_4_speed*this.speed);      this.angle_end+=(window.camera_4_speed*this.speed);      }" /><rect
+   id="rect3119" />
+   </svg>
