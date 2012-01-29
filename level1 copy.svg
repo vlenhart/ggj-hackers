@@ -126,4 +126,10 @@
      width="47.272728"
      height="53.18182"
      x="482.27274"
-     y="175.45454" /></svg>
+     y="175.45454" />
+<rect id="message1" fill="none" stroke="#FFFFFF" stroke-miterlimit="10"
+  x="193.5" y="304"
+  width="97.5" height="61.356"
+  hackers:message="I should probably avoid being seen by those cameras..."
+/>
+</svg>

@@ -44,6 +44,18 @@
       background-size: 100%;
     }
     
+    #message {
+      display: none;
+      position: absolute;
+      font-size: 25px;
+      top: 0;
+      left: 0;
+      color: green;
+      margin: 50px;
+      font-family: "Courier New";
+      width: 800px;
+    }
+    
   </style>
  </head>
 
@@ -61,6 +73,7 @@
   <div id="level-completed-screen">
     <img src="level-completed-screen.png" />
   </div>
+  <div id="message">Hello World</div>
 
   <div id="hacking-tool">
     <textarea id="code"></textarea>
@@ -167,6 +180,28 @@ function bind(scope, fn) {
   return function () {
     return fn.apply(scope, toArray(arguments));
   };
+}
+
+function parsePolygon(poly) {
+  var points = new Array();
+  for(var i=0; i<poly.points.numberOfItems; i++) {
+    points.push(poly.points.getItem(i).x);
+    points.push(poly.points.getItem(i).y);
+  }
+  return points;
+}
+
+function parseRect(rect) {
+  var points = new Array();
+  points.push(rect.x.baseVal.value);
+  points.push(rect.y.baseVal.value);
+  points.push(rect.x.baseVal.value + rect.width.baseVal.value);
+  points.push(rect.y.baseVal.value);
+  points.push(rect.x.baseVal.value + rect.width.baseVal.value);
+  points.push(rect.y.baseVal.value + rect.height.baseVal.value);
+  points.push(rect.x.baseVal.value);
+  points.push(rect.y.baseVal.value + rect.height.baseVal.value);
+  return points;
 }
 
 var Player = {
@@ -318,6 +353,25 @@ var HackTool = {
   }
 };
 
+var Messages = {
+  messages: new Array(),
+  areas: new Array(),
+  states: new Array(),
+  update: function() {
+    for(var i=0; i<this.areas.length; i++) {
+      if(isPointInPoly(Player.x, Player.y, this.areas[i]) && !this.states[i]) {
+        this.states[i] = true;
+        $("#message").text(this.messages[i]);
+        $("#message").fadeIn();
+      } else if(!isPointInPoly(Player.x, Player.y, this.areas[i]) && this.states[i]) {
+        this.states[i] = false;
+        $("#message").fadeOut();
+      }
+    }
+  }
+};
+
+
 var Level = {
   walkable: undefined,
   exit: undefined,
@@ -349,30 +403,15 @@ var Level = {
       
       // parse walkable area
       if(elm[i].id == "walkable") {
-        Level.walkable = new Array();
-        for(var j=0; j<elm[i].points.numberOfItems; j++) {
-          Level.walkable.push(elm[i].points.getItem(j).x);
-          Level.walkable.push(elm[i].points.getItem(j).y);
-        }
+        Level.walkable = parsePolygon(elm[i]);
       }
       
       // parse exit area
       if(elm[i].id == "exit") {
-        Level.exit = new Array();
         if(elm[i].tagName == "rect") {
-          Level.exit.push(elm[i].x.baseVal.value);
-          Level.exit.push(elm[i].y.baseVal.value);
-          Level.exit.push(elm[i].x.baseVal.value+elm[i].width.baseVal.value);
-          Level.exit.push(elm[i].y.baseVal.value);
-          Level.exit.push(elm[i].x.baseVal.value+elm[i].width.baseVal.value);
-          Level.exit.push(elm[i].y.baseVal.value+elm[i].height.baseVal.value);
-          Level.exit.push(elm[i].x.baseVal.value);
-          Level.exit.push(elm[i].y.baseVal.value+elm[i].height.baseVal.value);
+          Level.exit = parseRect(elm[i]);
         } else {
-          for(var j=0; j<elm[i].points.numberOfItems; j++) {
-            Level.exit.push(elm[i].points.getItem(j).x);
-            Level.exit.push(elm[i].points.getItem(j).y);
-          }
+          Level.exit = parsePolygon(elm[i]);
         }
       }
       
@@ -393,14 +432,17 @@ var Level = {
       // parse terminals
       if(elm[i].id.indexOf("terminal")==0) {
         var script = elm[i].getAttribute("hackers:terminal-script");
-        var poly = new Array();
-        for(var j=0; j<elm[i].points.numberOfItems; j++) {
-          poly.push(elm[i].points.getItem(j).x);
-          poly.push(elm[i].points.getItem(j).y);
-        }
+        var poly = parsePolygon(elm[i])
         var fn = eval("("+script+")");
         Terminals.create(poly, fn);
         fn();
+      }
+      
+      // parse message areas
+      if(elm[i].id.indexOf("message")==0) {
+        Messages.messages.push(elm[i].getAttribute("hackers:message"));
+        Messages.areas.push(parseRect(elm[i]));
+        Messages.states.push(false);
       }
     }
   }
@@ -453,6 +495,7 @@ function draw() {
   //Terminals.draw();
   Player.update();
   Player.draw();
+  Messages.update();
 }
 
 function start_game() {
