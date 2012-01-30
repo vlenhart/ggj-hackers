@@ -1,4 +1,4 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html>
 <head>
   <meta charset="UTF-8"> 
   <title>Global Game Jam – Hackers</title>
@@ -80,7 +80,7 @@
   <canvas id="canvas" width="800" height="600"></canvas>
 </div>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
 <script type="text/javascript">
 
 // chrome/safari compatiblity
@@ -193,6 +193,13 @@ function parseArea(elm) {
 
 function parsePolygon(poly) {
   var points = new Array();
+  
+  if(!poly.points) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    el.setAttribute("points", poly.getAttribute("points"));
+    poly = el;
+  }
+
   for(var i=0; i<poly.points.numberOfItems; i++) {
     points.push(poly.points.getItem(i).x);
     points.push(poly.points.getItem(i).y);
@@ -202,14 +209,14 @@ function parsePolygon(poly) {
 
 function parseRect(rect) {
   var points = new Array();
-  points.push(rect.x.baseVal.value);
-  points.push(rect.y.baseVal.value);
-  points.push(rect.x.baseVal.value + rect.width.baseVal.value);
-  points.push(rect.y.baseVal.value);
-  points.push(rect.x.baseVal.value + rect.width.baseVal.value);
-  points.push(rect.y.baseVal.value + rect.height.baseVal.value);
-  points.push(rect.x.baseVal.value);
-  points.push(rect.y.baseVal.value + rect.height.baseVal.value);
+  points.push(parseFloat(rect.getAttribute("x")));
+  points.push(parseFloat(rect.getAttribute("y")));
+  points.push(parseFloat(rect.getAttribute("x")) + parseFloat(rect.getAttribute("width")));
+  points.push(parseFloat(rect.getAttribute("y")));
+  points.push(parseFloat(rect.getAttribute("x")) + parseFloat(rect.getAttribute("width")));
+  points.push(parseFloat(rect.getAttribute("y")) + parseFloat(rect.getAttribute("height")));
+  points.push(parseFloat(rect.getAttribute("x")));
+  points.push(parseFloat(rect.getAttribute("y")) + parseFloat(rect.getAttribute("height")));
   return points;
 }
 
@@ -413,28 +420,32 @@ var Level = {
     
     elm = xmlDoc.getElementsByTagName("svg")[0].childNodes;
     for(var i=0; i<elm.length; i++) {
-      if(!elm[i].id) {
+      if(!("getAttribute" in elm[i])) {
+        continue;
+      }
+      var id = elm[i].getAttribute("id");
+      if(!id) {
         continue;
       }
       
       // parse player
-      if(elm[i].id == "player") {
-        Player.x = elm[i].cx.baseVal.value;
-        Player.y = elm[i].cy.baseVal.value;
+      if(id == "player") {
+        Player.x = parseFloat(elm[i].getAttribute("cx"));
+        Player.y = parseFloat(elm[i].getAttribute("cy"));
       }
       
       // parse walkable area
-      if(elm[i].id == "walkable") {
+      if(id == "walkable") {
         Level.walkable = parseArea(elm[i]);
       }
       
       // parse exit area
-      if(elm[i].id == "exit") {
+      if(id == "exit") {
         Level.exit = parseArea(elm[i]);
       }
       
       // parse cameras
-      if(elm[i].id.indexOf("camera")==0) {
+      if(id.indexOf("camera")==0) {
         var script = elm[i].getAttribute("hackers:camera-script");
         Cameras.create(
           parseFloat(elm[i].getAttribute("sodipodi:cx")),
@@ -448,7 +459,7 @@ var Level = {
       }
       
       // parse terminals
-      if(elm[i].id.indexOf("terminal")==0) {
+      if(id.indexOf("terminal")==0) {
         var script = elm[i].getAttribute("hackers:terminal-script");
         var poly = parseArea(elm[i]);
         var fn = eval("("+script+")");
@@ -457,7 +468,7 @@ var Level = {
       }
       
       // parse message areas
-      if(elm[i].id.indexOf("message")==0) {
+      if(id.indexOf("message")==0) {
         Messages.messages.push(elm[i].getAttribute("hackers:message"));
         Messages.areas.push(parseArea(elm[i]));
         Messages.states.push(false);
@@ -546,6 +557,5 @@ function start_next_level() {
 }
 
 </script>
-
 </body>
 </html>
