@@ -61,8 +61,6 @@
 
 <body>
 
-<!--img id="level1-image" src="level1-image.png" style="display:none;" /-->
-
 <div id="container">
   <div id="title-screen" style="display:block;">
     <img onclick="start_game();" src="title-screen.png" />
@@ -246,8 +244,6 @@ var Player = {
 
     if(isPointInPoly(this.x, this.y, Level.exit)) {
       $("#level-completed-screen").fadeIn(1000);
-      //game_is_running=false;
-      // todo: allow transition to next level (button? link?)
     }
   }
 };
@@ -286,7 +282,6 @@ var Cameras = {
         ctx.fillStyle = "rgba(226, 71, 35, 0.5)";
         $("#game-over-screen").fadeIn(1000);
         game_is_running=false;
-        // todo: allow player to reload (button)
       }
       ctx.fill();
     }
@@ -321,7 +316,6 @@ var Terminals = {
     if (KeyEvent.DOM_VK_SPACE in keysDown) {
       for(var i=0; i<this.regions.length; i++) {
         if(isPointInPoly(Player.x, Player.y, this.regions[i])) {
-          //HackTool.show(this.functions[i].toString());
           HackTool.show(i);
           break;
         }
@@ -405,7 +399,6 @@ var Level = {
   walkable: undefined,
   exit: undefined,
   draw: function() {
-    //ctx.drawImage(document.getElementById("level1-image"),0,0);
     ctx.drawImage(level_background,0,0);
   },
   debug_draw: function() {
